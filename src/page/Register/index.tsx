@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { Button } from "../../components/Button";
 import { BiUser, BiKey } from "react-icons/bi";
 import { AiOutlineMail } from "react-icons/ai";
+import { api } from "../../server";
 
 interface IFormValues {
   name: string;
@@ -36,8 +37,13 @@ export function Register() {
     resolver: yupResolver(schema),
   });
 
-  const submit = handleSubmit((data) => {
-    console.log("🚀 ~ file: index.tsx:38 ~ submit ~ data:", data);
+  const submit = handleSubmit(async (data) => {
+    const result = await api.post("/users", {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    });
+   
   });
 
   return (
