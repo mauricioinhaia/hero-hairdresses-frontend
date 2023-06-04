@@ -29,3 +29,7 @@
   border: 1px solid var(--gray-50);
   background-color: var(--white);
 }
+
+.container span{
+    color: rgb(218, 27, 27);
+}

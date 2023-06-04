@@ -1,19 +1,23 @@
 .background {
   background: linear-gradient(to top, #29292988, #29292988),
-    url("../../assets/login.jpeg");
+    url("../../assets/register.jpg");
   min-height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
-  display: flex;
-  align-items: center;
 }
 
 .wrapper {
   display: flex;
-  flex-wrap: wrap;
+  width: 100%;
+  align-items: center;
+  height: 100vh;
+  /* flex-direction: column;
+  padding: 2rem; */
+}
+
+.imageContainer {
   width: 50%;
-  flex-direction: column;
-  padding: 2rem;
+  text-align: center;
 }
 
 .card {
@@ -22,6 +26,7 @@
   border-radius: 24px;
   padding: 3rem;
   text-align: center;
+  width: 50%;
 }
 
 .card h2 {
@@ -37,8 +42,13 @@
   justify-content: end;
 }
 
-.wrapper > div:first-child {
-  text-align: center;
+.navigate {
+  color: var(--white);
+  padding-top: 2rem;
+}
+
+.navigate a {
+  color: var(--white);
 }
 
 .register {

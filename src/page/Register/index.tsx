@@ -1,26 +1,31 @@
-import style from "./Login.module.css";
+import style from "./Register.module.css";
 import logo from "../../assets/logo.webp";
 import { Input } from "../../components/Input";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button } from "../../components/Button";
 import { Link } from "react-router-dom";
-import { BiKey } from "react-icons/bi";
+import { Button } from "../../components/Button";
+import { BiUser, BiKey } from "react-icons/bi";
 import { AiOutlineMail } from "react-icons/ai";
 
 interface IFormValues {
+  name: string;
   email: string;
   password: string;
 }
 
-export function Login() {
+export function Register() {
   const schema = yup.object().shape({
+    name: yup.string().required("Informe seu nome (Obrigatório)"),
     email: yup
       .string()
       .email("Digite um email válido")
       .required("Campo de email obrigatório"),
-    password: yup.string().required("Campo de Senha obrigatório"),
+    password: yup
+      .string()
+      .min(6, "Minimo de 6 Caracteres")
+      .required("Campo de senha obrigatório"),
   });
 
   const {
@@ -32,38 +37,48 @@ export function Login() {
   });
 
   const submit = handleSubmit((data) => {
-    console.log("🚀 ~ file: index.tsx:27 ~ submit ~ data:", data);
+    console.log("🚀 ~ file: index.tsx:38 ~ submit ~ data:", data);
   });
 
   return (
     <div className={style.background}>
-      <div className={`container ${style.container}`}>
+      <div className="container">
+        <p className={style.navigate}>
+          <Link to={"/"}>Home</Link> {">"} Área de Cadastro
+        </p>
         <div className={style.wrapper}>
-          <div>
+          <div className={style.imageContainer}>
             <img src={logo} alt="" />
           </div>
           <div className={style.card}>
-            <h2> Olá, seja Bem Vindo! </h2>
+            <h2> Área de Cadastro </h2>
             <form onSubmit={submit}>
               <Input
-                placeholder="Email"
+                placeholder="Insira seu Nome"
+                type="text"
+                {...register("name", { required: true })}
+                error={errors.name && errors.name.message}
+                icon={<BiUser size={20} />}
+              />
+              <Input
+                placeholder="Insira seu Email"
                 type="text"
                 {...register("email", { required: true })}
                 error={errors.email && errors.email.message}
                 icon={<AiOutlineMail size={20} />}
               />
               <Input
-                placeholder="Senha"
+                placeholder="Crie uma Senha"
                 type="password"
                 {...register("password", { required: true })}
                 error={errors.password && errors.password.message}
                 icon={<BiKey size={20} />}
               />
-              <Button text="Entrar" />
+              <Button text="Cadastrar" />
             </form>
             <div className={style.register}>
               <span>
-                Ainda não tem conta? <Link to={"/register"}>Cadastre-se</Link>
+                Já possui cadastro? <Link to={"/"}>Faça Login</Link>
               </span>
             </div>
           </div>
