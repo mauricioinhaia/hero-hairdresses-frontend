@@ -4,6 +4,10 @@ import { Input } from "../../components/Input";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Button } from "../../components/Button";
+import { Link } from "react-router-dom";
+import { BiKey } from "react-icons/bi";
+import { AiOutlineMail } from "react-icons/ai";
 
 interface IFormValues {
   email: string;
@@ -16,10 +20,14 @@ export function Login() {
       .string()
       .email("Digite um email válido")
       .required("Campo de email obrigatório"),
-    password: yup.string().required("Campo de email obrigatório"),
+    password: yup.string().required("Campo de Senha obrigatório"),
   });
 
-  const { register, handleSubmit, formState: {errors} } = useForm<IFormValues>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormValues>({
     resolver: yupResolver(schema),
   });
 
@@ -41,15 +49,23 @@ export function Login() {
                 placeholder="Email"
                 type="text"
                 {...register("email", { required: true })}
-                error = {errors.email && errors.email.message}
+                error={errors.email && errors.email.message}
+                icon={<AiOutlineMail size={20} />}
               />
               <Input
                 placeholder="Senha"
                 type="password"
                 {...register("password", { required: true })}
+                error={errors.password && errors.password.message}
+                icon={<BiKey size={20} />}
               />
-              <button>Entrar</button>
+              <Button text="Entrar" />
             </form>
+            <div className={style.register}>
+              <span>
+                Ainda não tem conta? <Link to={"/register"}>Cadastre-se</Link>
+              </span>
+            </div>
           </div>
         </div>
       </div>

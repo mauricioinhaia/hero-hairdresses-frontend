@@ -1,5 +1,6 @@
 .background {
-  background-image: url("../../assets/login.webp");
+  background: linear-gradient(to top, #29292988, #29292988),
+    url("../../assets/login.jpeg");
   min-height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
@@ -23,6 +24,14 @@
   text-align: center;
 }
 
+.card h2 {
+  color: var(--white);
+  font-style: normal;
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+
 .container {
   display: flex;
   justify-content: end;
@@ -32,11 +41,17 @@
   text-align: center;
 }
 
-.card h2 {
-  color: var(--white);
-  font-style: normal;
-  font-size: 2rem;
-  font-weight: 300;
-  margin-bottom: 2rem;
+.register {
+  text-align: left;
+  margin-top: 1rem;
+}
 
+.register span {
+  color: var(--white);
+  font-weight: 300;
+  font-size: 0.8rem;
+}
+
+.register a {
+  color: var(--white);
 }
