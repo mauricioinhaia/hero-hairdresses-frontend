@@ -19,7 +19,7 @@ export function Login() {
     password: yup.string().required("Campo de email obrigatório"),
   });
 
-  const { register, handleSubmit } = useForm<IFormValues>({
+  const { register, handleSubmit, formState: {errors} } = useForm<IFormValues>({
     resolver: yupResolver(schema),
   });
 
@@ -39,10 +39,13 @@ export function Login() {
             <form onSubmit={submit}>
               <Input
                 placeholder="Email"
+                type="text"
                 {...register("email", { required: true })}
+                error = {errors.email && errors.email.message}
               />
               <Input
                 placeholder="Senha"
+                type="password"
                 {...register("password", { required: true })}
               />
               <button>Entrar</button>
