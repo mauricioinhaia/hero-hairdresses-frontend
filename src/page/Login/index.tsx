@@ -39,10 +39,8 @@ export function Login() {
   const submit = handleSubmit(async ({ email, password }) => {
     try {
       signIn({ email, password });
-      navigate("/dashboard");
     } catch (error) {
-      console.log("🚀 ~ file: index.tsx:44 ~ submit ~ error:", error)
-      
+      console.log("🚀 ~ file: index.tsx:44 ~ submit ~ error:", error);
     }
 
     // navigate("/dashboard");

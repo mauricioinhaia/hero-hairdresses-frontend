@@ -43,8 +43,7 @@ export function Register() {
       email: data.email,
       password: data.password,
     });
-    console.log("🚀 ~ file: index.tsx:46 ~ submit ~ result:", result
-
+    console.log("🚀 ~ file: index.tsx:46 ~ submit ~ result:", result);
   });
 
   return (
