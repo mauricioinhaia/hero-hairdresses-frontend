@@ -1,9 +1,4 @@
-import axios, {
-  AxiosError,
-  AxiosRequestConfig,
-  AxiosResponse,
-  CancelToken,
-} from "axios";
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
 interface IRequestConfig extends AxiosRequestConfig {
   onFailure?: (error: AxiosError) => void;

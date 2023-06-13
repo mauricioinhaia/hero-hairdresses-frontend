@@ -1,8 +1,8 @@
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext } from "react";
 import { api } from "../server";
 import { isAxiosError } from "axios";
 import { toast } from "react-toastify";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface IAuthProvider {
   children: ReactNode;
