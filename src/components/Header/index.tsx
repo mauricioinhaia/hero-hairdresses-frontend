@@ -3,8 +3,11 @@ import logo from "../../assets/logo_branca.png";
 import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../../hooks/auth";
 
 export function Header() {
+  const { signOut } = useAuth();
+
   const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -23,7 +26,9 @@ export function Header() {
             <ul className={`${style.dropdownMenu} ${open && style.open}`}>
               <li className={style.dropdownMenuItem}>Agendamentos</li>
               <li className={style.dropdownMenuItem}>Editar Perfil</li>
-              <li className={style.dropdownMenuItem}>Sair</li>
+              <li className={style.dropdownMenuItem} onClick={signOut}>
+                Sair
+              </li>
             </ul>
           </div>
         </div>

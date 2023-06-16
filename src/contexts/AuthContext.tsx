@@ -10,6 +10,7 @@ interface IAuthProvider {
 
 interface IAuthContextData {
   signIn: ({ email, password }: ISignIn) => void;
+  signOut: () => void;
 }
 
 interface ISignIn {
@@ -52,7 +53,18 @@ export function AuthProvider({ children }: IAuthProvider) {
       }
     }
   }
+
+  async function signOut() {
+    localStorage.removeItem("token:semana-heroi");
+    localStorage.removeItem("refresh_token:semana-heroi");
+    localStorage.removeItem("user:semana-heroi");
+
+    navigate("/");
+  }
+
   return (
-    <AuthContext.Provider value={{ signIn }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ signIn, signOut }}>
+      {children}
+    </AuthContext.Provider>
   );
 }
