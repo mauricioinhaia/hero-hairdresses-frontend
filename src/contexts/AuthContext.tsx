@@ -1,4 +1,4 @@
-import { ReactNode, createContext } from "react";
+import { ReactNode, createContext, useState } from "react";
 import { api } from "../server";
 import { isAxiosError } from "axios";
 import { toast } from "react-toastify";
@@ -11,6 +11,13 @@ interface IAuthProvider {
 interface IAuthContextData {
   signIn: ({ email, password }: ISignIn) => void;
   signOut: () => void;
+  user: IUserData;
+}
+
+interface IUserData {
+  name: string;
+  email: string;
+  avatar_url: string;
 }
 
 interface ISignIn {
@@ -21,6 +28,14 @@ interface ISignIn {
 export const AuthContext = createContext({} as IAuthContextData);
 
 export function AuthProvider({ children }: IAuthProvider) {
+  const [user, setUser] = useState(() => {
+    const user = localStorage.getItem("user:semana-heroi");
+    if (user) {
+      return JSON.parse(user);
+    }
+    return {};
+  });
+
   const navigate = useNavigate();
 
   async function signIn({ email, password }: ISignIn) {
@@ -44,6 +59,9 @@ export function AuthProvider({ children }: IAuthProvider) {
 
       navigate("/dashboard");
       toast.success(`Seja Bem Vindo(a), ${userData.name}`);
+
+      setUser(userData);
+
       return data;
     } catch (error) {
       if (isAxiosError(error)) {
@@ -63,7 +81,7 @@ export function AuthProvider({ children }: IAuthProvider) {
   }
 
   return (
-    <AuthContext.Provider value={{ signIn, signOut }}>
+    <AuthContext.Provider value={{ signIn, signOut, user }}>
       {children}
     </AuthContext.Provider>
   );
