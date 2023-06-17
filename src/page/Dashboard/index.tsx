@@ -15,7 +15,7 @@ export function Dashboard() {
         <h2>Olá, {user.name}!</h2>
         <p>Esta é a sua lista de horários de hoje, 15/06/2023.</p>
       </div>
-      <h2> Próximos Horários </h2>
+      <h2 className={style.nextSchedules}> Próximos Horários </h2>
       <div className={style.schedule}>
         <div className={style.cardWrapper}>
           <Card />
@@ -32,7 +32,7 @@ export function Dashboard() {
           <Card />
         </div>
         <div className={style.picker}>
-          <DayPicker />
+          <DayPicker className={style.calendar} />
         </div>
       </div>
     </div>
