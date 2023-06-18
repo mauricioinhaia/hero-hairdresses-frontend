@@ -1,0 +1,102 @@
+.background {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+}
+
+.modal {
+  background-color: var(--white);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  border-radius: 16px;
+}
+
+.header {
+  background-color: var(--primary);
+  border-radius: 16px 16px 0 0;
+  color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem;
+  align-items: center;
+}
+
+.header svg {
+  cursor: pointer;
+}
+
+.body {
+  padding: 1rem 1.5rem;
+}
+.body > p {
+  color: var(--secondary);
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+}
+
+.input {
+  color: var(--primary);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.3rem;
+  align-items: center;
+}
+
+.input > input[type="date"] {
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  border-radius: 8px;
+  width: 40%;
+  padding: 0.3rem;
+}
+
+.input > select {
+  background-color: var(--white);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  border-radius: 8px;
+  width: 40%;
+  padding: 0.3rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+.footer > button:first-child {
+  border: 1px solid var(--secondary);
+  background: none;
+  color: var(--secondary);
+}
+
+.footer > button:first-child:hover {
+  background: var(--gray-50);
+}
+
+.footer > button {
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 300;
+  border-radius: 16px;
+  padding: 0.3rem 1.5rem;
+  width: 30%;
+}
+
+.footer > button:nth-child(2) {
+  border: 1px solid var(--secondary);
+  background-color: var(--secondary);
+  color: var(--white);
+}
+
+.footer > button:nth-child(2):hover {
+  background-color: var(--primary);
+}
