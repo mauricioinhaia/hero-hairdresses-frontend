@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
 import { Header } from "../../components/Header";
 import { useAuth } from "../../hooks/auth";
@@ -7,9 +7,18 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { ptBR } from "date-fns/locale";
 import { format, isToday } from "date-fns";
+import { api } from "../../server";
+
+interface ISchedule {
+  name: string;
+  phone: string;
+  date: Date;
+  id: string;
+}
 
 export function Dashboard() {
   const [date, setDate] = useState(new Date());
+  const [schedules, setSchedules] = useState<Array<ISchedule>>([]);
   const { user } = useAuth();
 
   const isWeekend = (date: Date) => {
@@ -26,6 +35,18 @@ export function Dashboard() {
     return setDate(date);
   };
 
+  useEffect(() => {
+    api
+      .get("/schedules", { params: { date } })
+      .then((response) => {
+        console.log("🚀 ~ file: index.tsx:32 ~ api.post ~ response:", response);
+        setSchedules(response.data);
+      })
+      .catch((error) => {
+        console.log("🚀 ~ file: index.tsx:34 ~ api.post ~ error:", error);
+      });
+  }, [date]);
+
   return (
     <div className="container">
       <Header />
@@ -41,18 +62,17 @@ export function Dashboard() {
       <h2 className={style.nextSchedules}> Próximos Horários </h2>
       <div className={style.schedule}>
         <div className={style.cardWrapper}>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {schedules.map((schedule, index) => {
+            return (
+              <Card
+                key={index}
+                date={schedule.date}
+                name={schedule.name}
+                id={schedule.id}
+                phone={schedule.phone}
+              />
+            );
+          })}
         </div>
         <div className={style.picker}>
           <DayPicker

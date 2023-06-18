@@ -26,6 +26,10 @@
   margin-right: 1rem;
 }
 
+.disabled {
+  background-color: var(--gray-300) !important;
+}
+
 .icons {
   margin-right: 0.5rem;
 }
