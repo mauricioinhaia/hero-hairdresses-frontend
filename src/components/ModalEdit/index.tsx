@@ -1,21 +1,31 @@
 import { useAuth } from "../../hooks/auth";
 import style from "./ModalEdit.module.css";
 import { AiOutlineClose } from "react-icons/ai";
-import { getHours } from "date-fns";
+import { formatISO, getHours, parseISO, setHours } from "date-fns";
 import { useState } from "react";
+import { api } from "../../server";
+import { toast } from "react-toastify";
+import { isAxiosError } from "axios";
 
 interface IModal {
   isOpen: boolean;
   handleChangeModal: () => void;
-  hour: number;
+  hour: string;
   name: string;
+  id: string;
 }
 
-export function ModalEdit({ isOpen, handleChangeModal, hour, name }: IModal) {
+export function ModalEdit({
+  isOpen,
+  handleChangeModal,
+  hour,
+  name,
+  id,
+}: IModal) {
   const { availableSchedules, schedules, date, handleSetDate } = useAuth();
-  const [hourSchedule, setHourSchedule] = useState('');
+  const [hourSchedule, setHourSchedule] = useState("");
 
-  const todayValue = new Date().toISOString().split("T")[0];
+  const currentValue = new Date().toISOString().split("T")[0];
 
   const filteredDate = availableSchedules.filter((hour) => {
     const isScheduleAvailable = !schedules.find((scheduleItem) => {
@@ -23,14 +33,29 @@ export function ModalEdit({ isOpen, handleChangeModal, hour, name }: IModal) {
       const scheduleHour = getHours(scheduleDate);
       return scheduleHour === Number(hour);
     });
-    console.log(
-      "🚀 ~ file: index.tsx:24 ~ isScheduleAvailable ~ isScheduleAvailable:",
-      isScheduleAvailable
-    );
     return isScheduleAvailable;
   });
 
-  const handleChangeHour = (hourSchedule) => {};
+  const handleChangeHour = (hour: string) => {
+    setHourSchedule(hour);
+  };
+
+  const updateData = async () => {
+    const formattedDate = formatISO(
+      setHours(parseISO(date), parseInt(hourSchedule))
+    );
+    try {
+      await api.put(`/schedules/${id}`, {
+        date: formattedDate,
+      });
+      toast.success("Atualizado com sucesso");
+      handleChangeModal();
+    } catch (error) {
+      if (isAxiosError(error)) {
+        toast.error(error.response?.data.message);
+      }
+    }
+  };
 
   if (isOpen) {
     return (
@@ -48,8 +73,8 @@ export function ModalEdit({ isOpen, handleChangeModal, hour, name }: IModal) {
               <label htmlFor="">Escolha uma nova data:</label>
               <input
                 type="date"
-                min={todayValue}
-                defaultValue={todayValue}
+                min={currentValue}
+                defaultValue={currentValue}
                 onChange={(e) => handleSetDate(e.target.value)}
               />
             </div>
@@ -72,7 +97,7 @@ export function ModalEdit({ isOpen, handleChangeModal, hour, name }: IModal) {
           </div>
           <div className={style.footer}>
             <button onClick={handleChangeModal}>Cancelar</button>
-            <button>Ok</button>
+            <button onClick={updateData}>Ok</button>
           </div>
         </div>
       </div>
