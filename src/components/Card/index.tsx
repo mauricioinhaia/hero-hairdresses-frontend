@@ -3,6 +3,9 @@ import style from "./Card.module.css";
 import { RiDeleteBin5Line, RiEditLine } from "react-icons/ri";
 import { useState } from "react";
 import { ModalEdit } from "../ModalEdit";
+import { api } from "../../server";
+import { isAxiosError } from "axios";
+import { toast } from "react-toastify";
 
 interface ISchedule {
   name: string;
@@ -28,7 +31,16 @@ export const Card = ({ name, date, id, phone }: ISchedule) => {
     setOpenModal(!openModal);
   };
 
-  const handleDelete = () => {};
+  const handleDelete = async () => {
+    try {
+      await api.delete(`/schedules/${id}`);
+      toast.success("Deletado com sucesso");
+    } catch (error) {
+      if (isAxiosError(error)) {
+        toast.error(error.response?.data.message);
+      }
+    }
+  };
 
   return (
     <>
