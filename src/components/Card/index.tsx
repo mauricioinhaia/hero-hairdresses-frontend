@@ -28,6 +28,8 @@ export const Card = ({ name, date, id, phone }: ISchedule) => {
     setOpenModal(!openModal);
   };
 
+  const handleDelete = () => {};
+
   return (
     <>
       <div className={style.background}>
@@ -45,14 +47,21 @@ export const Card = ({ name, date, id, phone }: ISchedule) => {
               isAfterDate && handleChangeModal();
             }}
           />
-          <RiDeleteBin5Line color="#EB2A2A" size={17} />
+          <RiDeleteBin5Line
+            color="#EB2A2A"
+            size={17}
+            onClick={() => {
+              isAfterDate && handleDelete();
+            }}
+          />
         </div>
       </div>
       <ModalEdit
         isOpen={openModal}
         handleChangeModal={handleChangeModal}
-        hour={hour}
+        hour={String(hour)}
         name={name}
+        id={id}
       />
     </>
   );
