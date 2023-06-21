@@ -1,0 +1,58 @@
+.formDiv {
+  width: 50%;
+  margin: auto;
+}
+
+.date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.date select {
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  width: 30%;
+  color: var(--primary);
+  background-color: transparent;
+  align-items: center;
+  height: fit-content;
+  padding: 0.5rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.footer > button:first-child {
+  border: 1px solid var(--secondary);
+  background: none;
+  color: var(--secondary);
+}
+
+.footer > button:first-child:hover {
+  background: var(--gray-50);
+}
+
+.footer > button {
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 300;
+  border-radius: 16px;
+  padding: 0.3rem 1.5rem;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer > button:nth-child(2) {
+  border: 1px solid var(--secondary);
+  background-color: var(--secondary);
+  color: var(--white);
+}
+
+.footer > button:nth-child(2):hover {
+  background-color: var(--primary);
+}

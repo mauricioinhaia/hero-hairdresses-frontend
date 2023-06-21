@@ -16,6 +16,7 @@ interface IAuthContextData {
   schedules: Array<ISchedule>;
   date: string;
   handleSetDate: (date: string) => void;
+  isAuthenticated: boolean;
 }
 
 interface IUserData {
@@ -63,6 +64,8 @@ export function AuthProvider({ children }: IAuthProvider) {
     }
     return {};
   });
+
+  const isAuthenticated = !!user && Object.keys(user).length != 0;
 
   const navigate = useNavigate();
 
@@ -134,6 +137,7 @@ export function AuthProvider({ children }: IAuthProvider) {
         schedules,
         date,
         handleSetDate,
+        isAuthenticated,
       }}
     >
       {children}
