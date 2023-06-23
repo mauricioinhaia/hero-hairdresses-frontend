@@ -24,7 +24,7 @@ export function Header() {
             <CgProfile size={18} />
             <span>Perfil</span>
             <ul className={`${style.dropdownMenu} ${open && style.open}`}>
-              <li className={style.dropdownMenuItem}>Agendamentos</li>
+              <li className={style.dropdownMenuItem} onClick={() => navigate("/schedules")}>Agendamentos</li>
               <li className={style.dropdownMenuItem}>Editar Perfil</li>
               <li className={style.dropdownMenuItem} onClick={signOut}>
                 Sair
