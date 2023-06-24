@@ -4,6 +4,7 @@ import { Register } from "../page/Register";
 import { Dashboard } from "../page/Dashboard";
 import { Schedules } from "../page/Schedules";
 import { PrivateRoute } from "./PrivateRoutes";
+import { EditProfile } from "../page/EditProfile";
 
 export const RouteApp = () => {
   return (
@@ -23,6 +24,14 @@ export const RouteApp = () => {
         element={
           <PrivateRoute>
             <Schedules />
+          </PrivateRoute>
+        }
+      ></Route>
+      <Route
+        path="/editprofile"
+        element={
+          <PrivateRoute>
+            <EditProfile />
           </PrivateRoute>
         }
       ></Route>
