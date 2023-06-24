@@ -4,11 +4,12 @@ import { Input } from "../../components/Input";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../components/Button";
 import { BiUser, BiKey } from "react-icons/bi";
 import { AiOutlineMail } from "react-icons/ai";
 import { api } from "../../server";
+import { toast } from "react-toastify";
 
 interface IFormValues {
   name: string;
@@ -37,13 +38,16 @@ export function Register() {
     resolver: yupResolver(schema),
   });
 
+  const navigate = useNavigate();
+
   const submit = handleSubmit(async (data) => {
     const result = await api.post("/users", {
       name: data.name,
       email: data.email,
       password: data.password,
     });
-    console.log("🚀 ~ file: index.tsx:46 ~ submit ~ result:", result);
+    toast.success("Cadastrado com Sucesso");
+    navigate("/");
   });
 
   return (
