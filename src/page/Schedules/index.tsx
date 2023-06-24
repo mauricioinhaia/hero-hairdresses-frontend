@@ -8,10 +8,32 @@ import { api } from "../../server";
 import { toast } from "react-toastify";
 import { isAxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+interface IFormValues {
+  name: string;
+  phone: string;
+  date: string;
+  hour: string;
+}
 
 export function Schedules() {
-  const { register, handleSubmit } = useForm();
-  const { availableSchedules, schedules, date, handleSetDate } = useAuth();
+  const schema = yup.object().shape({
+    name: yup.string().required("Campo de nome obrigatorio"),
+    phone: yup.string().required("Campo de telefone obrigatorio"),
+    date: yup.string().required("Campo de data obrigatorio"),
+    hour: yup.string().required("Campo de hora obrigatorio"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormValues>({
+    resolver: yupResolver(schema),
+  });
+  const { availableSchedules, schedules, handleSetDate } = useAuth();
 
   const navigate = useNavigate();
   const currentValue = new Date().toISOString().split("T")[0];
@@ -53,11 +75,13 @@ export function Schedules() {
             placeholder="Nome do Cliente"
             type="text"
             {...register("name", { required: true })}
+            error={errors.name && errors.name.message}
           />
           <InputSchedule
             placeholder="Fone"
             type="text"
             {...register("phone", { required: true })}
+            error={errors.phone && errors.phone.message}
           />
           <div className={style.date}>
             <InputSchedule
@@ -68,6 +92,7 @@ export function Schedules() {
                 value: currentValue,
                 onChange: (e) => handleSetDate(e.target.value),
               })}
+              error={errors.date && errors.date.message}
             />
             <div className={style.select}>
               <label htmlFor="">Hora</label>
@@ -84,6 +109,7 @@ export function Schedules() {
                   );
                 })}
               </select>
+              {errors.name && <span>{errors.name.message}</span>}
             </div>
           </div>
           <div className={style.footer}>
