@@ -5,39 +5,70 @@
 }
 
 .footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1rem;
-  }
-  
-  .footer > button:first-child {
-    border: 1px solid var(--secondary);
-    background: none;
-    color: var(--secondary);
-  }
-  
-  .footer > button:first-child:hover {
-    background: var(--gray-50);
-  }
-  
-  .footer > button {
-    cursor: pointer;
-    text-decoration: none;
-    font-weight: 300;
-    border-radius: 16px;
-    padding: 0.3rem 1.5rem;
-    width: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .footer > button:nth-child(2) {
-    border: 1px solid var(--secondary);
-    background-color: var(--secondary);
-    color: var(--white);
-  }
-  
-  .footer > button:nth-child(2):hover {
-    background-color: var(--primary);
-  }
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.footer > button:first-child {
+  border: 1px solid var(--secondary);
+  background: none;
+  color: var(--secondary);
+}
+
+.footer > button:first-child:hover {
+  background: var(--gray-50);
+}
+
+.footer > button {
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 300;
+  border-radius: 16px;
+  padding: 0.3rem 1.5rem;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer > button:nth-child(2) {
+  border: 1px solid var(--secondary);
+  background-color: var(--secondary);
+  color: var(--white);
+}
+
+.footer > button:nth-child(2):hover {
+  background-color: var(--primary);
+}
+
+.profileImage img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 2px color(var(--primary));
+}
+
+.profileImage {
+  width: 100%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.imageUpload input[type="file"] {
+  display: none;
+}
+
+.imageUpload {
+  background-color: var(--primary);
+  padding: 10px;
+  border-radius: 50%;
+  display: inline-flex;
+  color: var(--white);
+  position: absolute;
+  bottom: 10px;
+  right: auto;
+  left: 56%;
+  cursor: pointer;
+}
