@@ -65,6 +65,9 @@ export function Schedules() {
     }
   });
 
+  const handleCancel = () => {
+    navigate("/dashboard");
+  };
   return (
     <div className={`${style.container} container`}>
       <Header />
@@ -109,11 +112,11 @@ export function Schedules() {
                   );
                 })}
               </select>
-              {errors.name && <span>{errors.name.message}</span>}
+              {errors.hour && <span>{errors.hour.message}</span>}
             </div>
           </div>
           <div className={style.footer}>
-            <button>Cancelar</button>
+            <button onClick={handleCancel}>Cancelar</button>
             <button>Ok</button>
           </div>
         </form>
