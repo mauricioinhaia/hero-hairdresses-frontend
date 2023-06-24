@@ -35,6 +35,11 @@
   opacity: 1;
 }
 
+.dropdownMenu a {
+  color: var(--white);
+  text-decoration: none;
+}
+
 .dropdownMenu {
   position: absolute;
   background-color: var(--primary);

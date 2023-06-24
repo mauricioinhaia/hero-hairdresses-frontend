@@ -1,7 +1,7 @@
 import style from "./Header.module.css";
 import logo from "../../assets/logo_branca.png";
 import { CgProfile } from "react-icons/cg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../hooks/auth";
 
@@ -24,8 +24,12 @@ export function Header() {
             <CgProfile size={18} />
             <span>Perfil</span>
             <ul className={`${style.dropdownMenu} ${open && style.open}`}>
-              <li className={style.dropdownMenuItem} onClick={() => navigate("/schedules")}>Agendamentos</li>
-              <li className={style.dropdownMenuItem}>Editar Perfil</li>
+              <Link to={"/schedules"}>
+                <li className={style.dropdownMenuItem}>Agendamentos</li>
+              </Link>
+              <Link to={"/editprofile"}>
+                <li className={style.dropdownMenuItem}>Editar Perfil</li>
+              </Link>
               <li className={style.dropdownMenuItem} onClick={signOut}>
                 Sair
               </li>
